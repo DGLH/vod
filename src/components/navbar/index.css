@@ -1,0 +1,141 @@
+/* navbar container 样式 */
+.navbar-web-contaier {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 56px;
+  min-width: 1200px;
+  color: #666;
+  font-size: 16px;
+  background-color: #6a717c;
+  padding: 0 36px;
+  filter: opacity(0.9);
+  contain: strict;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-web-contaier-item {
+  width: 33%;
+  overflow: hidden;
+}
+
+/* navbar 下的 img 标签 */
+.navbar-web-contaier img {
+  height: 32px;
+  width: 32px;
+}
+
+/* logo 样式 */
+.navbar-web-logo {
+  user-select: none;
+  height: 32px;
+  width: 32px;
+  position: relative;
+  top: 8px;
+}
+
+.navbar-web-logo-name {
+  color: #fff;
+  font-size: 14px;
+  user-select: none;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  font-style: italic;
+  height: 56px;
+}
+
+/* 视频源样式 */
+.navbar-web-source-name {
+  color: #fff;
+  margin-left: 36px;
+  position: relative;
+  top: 10px;
+}
+
+.ant-dropdown-link {
+  color: #1890ff;
+  display: inline-block;
+  max-width: 120px;
+  cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* 搜索区域样式 */
+.navbar-web-search .ant-input-affix-wrapper.ant-input-affix-wrapper-lg,
+.ant-input-search .ant-input-group .ant-input-affix-wrapper:not(:last-child) {
+  height: 36px;
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+}
+.navbar-web-search .ant-input-group-addon {
+  background-color: #6a717c;
+}
+.navbar-web-search .ant-input-group-addon .ant-btn.ant-btn-primary.ant-btn-lg.ant-input-search-button {
+  height: 36px;
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
+/* 右侧个人详情区域样式 */
+.self-info {
+  text-align: right;
+  color: #fff;
+  user-select: none;
+}
+
+.navbar-web-contaier-item.self-info span {
+  margin: 0 16px;
+}
+
+.navbar-web-contaier-item.self-info span img {
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* tiemline 样式 */
+.timeline-container {
+  width: 310px;
+  background-color: #fff;
+  max-height: 400px;
+  border-radius: 8px;
+  box-shadow: 0 28px 50px rgb(25 24 40 / 35%);
+}
+
+.timeline-container .timeline-header {
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: #f8f8f8;
+}
+
+.timeline-container .timeline-footer {
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  color: #666;
+  background-color: #f8f8f8;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.timeline-body {
+  max-height: 320px;
+  overflow: auto;
+  padding: 0 8px;
+}
+.timeline-body .ant-timeline {
+  margin-top: 10px;
+}
+.timeline-container .timeline-body .ant-timeline .ant-timeline-item.ant-timeline-item-last {
+  padding-bottom: 0;
+}
+.timeline-container .ant-dropdown-menu-item-last .ant-timeline-item-tail {
+  display: none;
+}

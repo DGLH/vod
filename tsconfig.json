@@ -22,7 +22,9 @@
       "src/*": ["src/*"],
       "pages/*": ["src/pages/*"],
       "utils/*": ["src/utils/*"],
-      "components/*": ["src/components/*"]
+      "components/*": ["src/components/*"],
+      "assets/*": ["src/assets/*"],
+      "app/*": ["src/app/*"]
     }
   },
   "include": ["./src"]
