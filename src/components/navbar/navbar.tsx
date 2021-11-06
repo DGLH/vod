@@ -7,17 +7,22 @@ import { historySvg, favoriteSvg } from 'assets/svg';
 import { usrPng } from 'assets/png';
 
 import './index.css';
+import { connect, ConnectedProps } from 'react-redux';
+import { RootState } from 'app/rootReducer';
+import { usrInfoSelector, usrSourceSelector, watchHistorySelector, actions as usrActions } from 'src/redux/usr';
+import { formateTimeline } from 'utils/timelineFormate';
 
 const { Search } = Input;
 
-export const NavbarWeb = () => {
+const Web: React.FC<ReduxProps> = ({ watchHistory, usrSource, setCurrentSource }) => {
   const searchHandle = useCallback((search: string) => {
     console.log(search);
   }, []);
 
   const menu = useMemo(() => {
     const onClick = ({ key }: { key: string }) => {
-      console.log(key);
+      const select = SOURCE.get(key);
+      setCurrentSource({ label: key, address: select! });
     };
 
     return (
@@ -33,61 +38,30 @@ export const NavbarWeb = () => {
         <Menu.Item key="create">添加新视频源+</Menu.Item> */}
       </Menu>
     );
-  }, []);
+  }, [setCurrentSource]);
 
   const timeline = useMemo(() => {
+    const formatTimeline = formateTimeline(watchHistory);
+
     return (
       <div className="timeline-container">
         <div className="timeline-header">历史记录</div>
         <div className="timeline-body">
           <Timeline pending={false}>
-            <Timeline.Item color="gray">
-              <div>今天</div>
-              <div>是是是</div>
-            </Timeline.Item>
-            <Timeline.Item color="gray">
-              <div>昨天</div>
-              <div>不不不</div>
-            </Timeline.Item>
-            <Timeline.Item color="gray">
-              <div>昨天</div>
-              <div>不不不</div>
-            </Timeline.Item>
-            <Timeline.Item color="gray">
-              <div>昨天</div>
-              <div>不不不</div>
-            </Timeline.Item>
-
-            {/* <Timeline.Item color="gray">
-              <div>昨天</div>
-              <div>不不不</div>
-            </Timeline.Item>
-            <Timeline.Item color="gray">
-              <div>昨天</div>
-              <div>不不不</div>
-            </Timeline.Item>
-            <Timeline.Item color="gray">
-              <div>昨天</div>
-              <div>不不不</div>
-            </Timeline.Item>
-            <Timeline.Item color="gray">
-              <div>昨天</div>
-              <div>不不不</div>
-            </Timeline.Item>
-            <Timeline.Item color="gray">
-              <div>昨天</div>
-              <div>不不不</div>
-            </Timeline.Item>
-            <Timeline.Item color="gray">
-              <div>昨天</div>
-              <div>不不不</div>
-            </Timeline.Item> */}
+            {formatTimeline.map((tl) => (
+              <Timeline.Item color="gray" key={tl.time}>
+                <div>{tl.time}</div>
+                {tl.historys.map((history) => (
+                  <div key={history.movieName + history.watchDate}>{history.movieName}</div>
+                ))}
+              </Timeline.Item>
+            ))}
           </Timeline>
         </div>
         <div className="timeline-footer">查看全部记录</div>
       </div>
     );
-  }, []);
+  }, [watchHistory]);
 
   return (
     <div className="navbar-web-contaier">
@@ -104,9 +78,7 @@ export const NavbarWeb = () => {
           <span>
             当前视频源：
             <Dropdown overlay={menu} placement="bottomCenter">
-              <p className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-                百度
-              </p>
+              <p className="ant-dropdown-link">{usrSource.currentSource.label}</p>
             </Dropdown>
           </span>
         </span>
@@ -143,3 +115,18 @@ export const NavbarWeb = () => {
 export const NavbarMobile = () => {
   return <span className="navbar-web-logo">{<img src={Logo} />}</span>;
 };
+
+const connector = connect(
+  (state: RootState) => ({
+    usrInfo: usrInfoSelector(state),
+    watchHistory: watchHistorySelector(state),
+    usrSource: usrSourceSelector(state),
+  }),
+  {
+    setCurrentSource: usrActions.setCurrentSource,
+  },
+);
+
+type ReduxProps = ConnectedProps<typeof connector>;
+// export default connector(ToolManager);
+export const NavbarWeb = connector(Web);
