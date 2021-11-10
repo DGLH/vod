@@ -7,6 +7,6 @@ export interface Params {
 }
 
 export const formatUrl = (params: Partial<Params>) =>
-  `${params.t ? `&t=${params.t}` : ''}${params.pg ? `&pg=${params.pg}` : ''}${params.wd ? `&wd=${params.wd}` : ''}${
-    params.h ? `&h=${params.h}` : ''
-  }${params.ids ? `&ids=${params.ids.join(',')}` : ''}`;
+  `${params.t && params.t !== '0' ? `&t=${params.t}` : ''}${params.pg ? `&pg=${params.pg}` : ''}${
+    params.wd ? `&wd=${params.wd}` : ''
+  }${params.h ? `&h=${params.h}` : ''}${params.ids ? `&ids=${params.ids.join(',')}` : ''}`;

@@ -1,17 +1,16 @@
 import React from 'react';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 
+import { ROUTES } from 'src/utils/constant';
 import { Home } from './home';
-
-const ROUTES = {
-  HOME: '/home',
-};
+import { WebSerch } from './search';
 
 const PrimaryLayout: React.FC = () => (
   <HashRouter>
     <Switch>
-      <Route path={ROUTES.HOME + '/:id'} component={Home} />
-      <Redirect to={ROUTES.HOME + '/0'} />
+      <Route path={ROUTES.HOME} component={Home} />
+      <Route path={ROUTES.SEARCH} component={WebSerch} />
+      <Redirect to={ROUTES.HOME} />
     </Switch>
   </HashRouter>
 );

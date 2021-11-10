@@ -8,3 +8,8 @@ export const SOURCE = new Map([
   ['8090', 'http://zy.yilans.net:8090/api.php/provide/vod/at/xml'],
   // ['365', 'http://video.365tx.com/api.php/provide/vod/at/xml'],
 ]);
+
+export const ROUTES = {
+  HOME: '/home',
+  SEARCH: '/search',
+};

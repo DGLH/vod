@@ -13,7 +13,7 @@ export const ClassListWeb: React.FC<Props> = ({ classes }) => {
       {classes?.length ? (
         classes.map((cl) => (
           <span className="classlist-web-item" key={cl.id}>
-            <Link to="/home/1">{cl.name}</Link>
+            <Link to={`/home/?t=${cl.id}`}>{cl.name}</Link>
           </span>
         ))
       ) : (

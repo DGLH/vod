@@ -5,10 +5,21 @@ import { SOURCE } from 'src/utils/constant';
 import Logo from 'src/favicon.svg';
 import { historySvg, favoriteSvg } from 'assets/svg';
 import { usrPng } from 'assets/png';
-import { WatchHistory, Source, UsrSource } from 'src/redux/usr';
+import {
+  WatchHistory,
+  Source,
+  UsrSource,
+  usrInfoSelector,
+  usrSourceSelector,
+  watchHistorySelector,
+  epicActions as usrEpics,
+} from 'src/redux/usr';
+
 import { formateTimeline } from 'utils/timelineFormate';
 
 import './index.css';
+import { connect } from 'react-redux';
+import { RootState } from 'src/app/rootReducer';
 
 const { Search } = Input;
 
@@ -16,9 +27,10 @@ interface NavbarType {
   watchHistory: WatchHistory[];
   usrSource: UsrSource;
   setCurrentSource: (source: Source) => void;
+  needSource?: boolean;
 }
 
-export const NavbarWeb: React.FC<NavbarType> = ({ watchHistory, usrSource, setCurrentSource }) => {
+export const Web: React.FC<NavbarType> = ({ watchHistory, usrSource, setCurrentSource, needSource = true }) => {
   const searchHandle = useCallback((search: string) => {
     console.log(search);
   }, []);
@@ -78,14 +90,16 @@ export const NavbarWeb: React.FC<NavbarType> = ({ watchHistory, usrSource, setCu
           <span>美好恰饭时光 </span>
         </span>
 
-        <span className="navbar-web-source-name">
-          <span>
-            当前视频源：
-            <Dropdown overlay={menu} placement="bottomCenter">
-              <p className="ant-dropdown-link">{usrSource.currentSource.label}</p>
-            </Dropdown>
+        {needSource ? (
+          <span className="navbar-web-source-name">
+            <span>
+              当前视频源：
+              <Dropdown overlay={menu} placement="bottomCenter">
+                <p className="ant-dropdown-link">{usrSource.currentSource.label}</p>
+              </Dropdown>
+            </span>
           </span>
-        </span>
+        ) : null}
       </span>
 
       <span className="navbar-web-contaier-item">
@@ -115,6 +129,18 @@ export const NavbarWeb: React.FC<NavbarType> = ({ watchHistory, usrSource, setCu
     </div>
   );
 };
+
+const connector = connect(
+  (state: RootState) => ({
+    usrInfo: usrInfoSelector(state),
+    watchHistory: watchHistorySelector(state),
+    usrSource: usrSourceSelector(state),
+  }),
+  {
+    setCurrentSource: usrEpics.setCurrentSource,
+  },
+);
+export const NavbarWeb = connector(Web);
 
 export const NavbarMobile = () => {
   return <span className="navbar-web-logo">{<img src={Logo} />}</span>;
