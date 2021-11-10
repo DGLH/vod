@@ -10,8 +10,8 @@ const ROUTES = {
 const PrimaryLayout: React.FC = () => (
   <HashRouter>
     <Switch>
-      <Route path={ROUTES.HOME} component={Home} />
-      <Redirect to={ROUTES.HOME} />
+      <Route path={ROUTES.HOME + '/:id'} component={Home} />
+      <Redirect to={ROUTES.HOME + '/0'} />
     </Switch>
   </HashRouter>
 );

@@ -8,18 +8,19 @@ import { catchError } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 
 import { epics as movieEpics } from 'src/redux/movie';
+import { epics as usrEpics } from 'src/redux/usr';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: [],
+  whitelist: ['usr'],
 };
 
 const persisitedReducer = persistReducer(persistConfig, rootReducer);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const rootEpic = (action$: Observable<Action<unknown>>, state$: StateObservable<any>) =>
-  combineEpics(...movieEpics)(action$, state$, []).pipe(
+  combineEpics(...movieEpics, ...usrEpics)(action$, state$, []).pipe(
     catchError((error) => {
       console.error('epic error', error);
       return of({ type: 'other/setError', payload: { message: error.message } });

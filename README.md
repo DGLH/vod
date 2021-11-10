@@ -34,8 +34,8 @@
 
     - http://zy.yilans.net:8090/api.php/provide/vod/at/xml
 
-  - 365 影视 XML (会跳转新页面打开)
-    - http://video.365tx.com/api.php/provide/vod/at/xml
+  <!-- - 365 影视 XML (会跳转新页面打开)
+    - http://video.365tx.com/api.php/provide/vod/at/xml -->
 
 - 设计稿：没有，全靠脑补，啊哈哈哈哈哈
 

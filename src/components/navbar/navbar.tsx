@@ -5,16 +5,20 @@ import { SOURCE } from 'src/utils/constant';
 import Logo from 'src/favicon.svg';
 import { historySvg, favoriteSvg } from 'assets/svg';
 import { usrPng } from 'assets/png';
+import { WatchHistory, Source, UsrSource } from 'src/redux/usr';
+import { formateTimeline } from 'utils/timelineFormate';
 
 import './index.css';
-import { connect, ConnectedProps } from 'react-redux';
-import { RootState } from 'app/rootReducer';
-import { usrInfoSelector, usrSourceSelector, watchHistorySelector, actions as usrActions } from 'src/redux/usr';
-import { formateTimeline } from 'utils/timelineFormate';
 
 const { Search } = Input;
 
-const Web: React.FC<ReduxProps> = ({ watchHistory, usrSource, setCurrentSource }) => {
+interface NavbarType {
+  watchHistory: WatchHistory[];
+  usrSource: UsrSource;
+  setCurrentSource: (source: Source) => void;
+}
+
+export const NavbarWeb: React.FC<NavbarType> = ({ watchHistory, usrSource, setCurrentSource }) => {
   const searchHandle = useCallback((search: string) => {
     console.log(search);
   }, []);
@@ -115,18 +119,3 @@ const Web: React.FC<ReduxProps> = ({ watchHistory, usrSource, setCurrentSource }
 export const NavbarMobile = () => {
   return <span className="navbar-web-logo">{<img src={Logo} />}</span>;
 };
-
-const connector = connect(
-  (state: RootState) => ({
-    usrInfo: usrInfoSelector(state),
-    watchHistory: watchHistorySelector(state),
-    usrSource: usrSourceSelector(state),
-  }),
-  {
-    setCurrentSource: usrActions.setCurrentSource,
-  },
-);
-
-type ReduxProps = ConnectedProps<typeof connector>;
-// export default connector(ToolManager);
-export const NavbarWeb = connector(Web);

@@ -1,0 +1,80 @@
+/* 电脑端样式 */
+.show-web-container {
+  width: 100%;
+  height: 880px;
+}
+
+.show-web-list {
+  width: 100%;
+  height: 850px;
+  background-color: #fff;
+  contain: strict;
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+  grid-template-rows: repeat(4, 24%);
+  position: relative;
+}
+
+.loading {
+  padding: 1px;
+  margin: 50px;
+  border: 5px solid #666;
+  padding: 50px;
+  border-bottom: #cccccc 5px solid;
+  border-radius: 50%;
+  animation: load 1.1s infinite linear;
+}
+@keyframes load {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.show-web-container .show-web-pic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s all linear;
+}
+
+.show-web-container .show-web-pic.loading {
+  width: 10%;
+  height: 10%;
+}
+
+.show-web-container .show-web-pic img {
+  width: 200px;
+  height: 200px;
+}
+
+.ant-popover {
+  max-width: 400px;
+}
+.ant-popover-inner-content {
+  word-break: break-all;
+  max-height: 400px;
+  overflow: auto;
+}
+
+/*  清除无图片时的灰边 */
+img[src=''],
+img:not([src]) {
+  opacity: 0;
+  border: none;
+  visibility: hidden;
+  max-width: none;
+}
+
+.show-web-pagination {
+  text-align: right;
+  position: relative;
+  top: -22px;
+}
+
+/* 手机端样式 */
+.show-mobile-container {
+  background-color: #fff;
+}

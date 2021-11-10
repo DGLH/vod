@@ -6,5 +6,5 @@ export const SOURCE = new Map([
   ['人人资源', 'https://www.rrzyw.cc/api.php/provide/vod/at/xml'],
   ['穿梭资源', 'http://ok.888hyk.com/api.php/provide/vod/at/xml'],
   ['8090', 'http://zy.yilans.net:8090/api.php/provide/vod/at/xml'],
-  ['365', 'http://video.365tx.com/api.php/provide/vod/at/xml'],
+  // ['365', 'http://video.365tx.com/api.php/provide/vod/at/xml'],
 ]);
